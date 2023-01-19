@@ -123,7 +123,7 @@ The only line you need to edit is to change `command=/usr/bin/dotnet Example.dll
 
 ## Configuring up GitHub Actions
 After creating a GitHub repo, what you can do now is create your workflow file. We recommend adjusting your workflow to your project's requirements.
-For the sake of this example, we will provide a workflow file that you can find under `.github/workflows/umbraco.yml`.
+For the sake of this example, we will provide a workflow file that you can find under `.github/workflows/umbraco.yml-example`. Ensure to rename ty file by removing the `-example` once you have made your changes.
 The workflow file here has a couple of environment variables we will need to add into our GitHub repository.
 
 Go into your repository's `Settings` tab then go into `Secrets and variables` then into the subcategory `Actions`.
