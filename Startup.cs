@@ -29,6 +29,15 @@ namespace umbraco_example
         /// </remarks>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                // Sets the expected Forward headers
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                // Both functions allows any local network or proxy to connect.
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
+            });
+
             services.AddUmbraco(_env, _config)
                 .AddBackOffice()
                 .AddWebsite()
@@ -47,6 +56,15 @@ namespace umbraco_example
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // This adds the forwarded headers from above.
+            app.UseForwardedHeaders();
+
+            // Enforces HTTPS redirection
+            app.UseHttpsRedirection();
+            
+            // Adds our own rewriter that uses the IISUrlRewrite.xml file
+            app.UseRewriter(new RewriteOptions().AddIISUrlRewrite(env.ContentRootFileProvider, "IISUrlRewrite.xml"));
 
             app.UseUmbraco()
                 .WithMiddleware(u =>
