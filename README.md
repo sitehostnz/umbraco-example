@@ -139,3 +139,6 @@ After this, any push or pull request that is done to the repository the Action w
 
 ## Adding new Packages
 To add new packages, you can simply add them like other .NET packages. If you go to the Packages tab underneath your Umbraco control panel, you can click on whichever package you want and it will give you the command to run. Do this in your repository, commit and push the changes then GitHub actions will push the Package to your server.
+
+## Enforcing HTTPS
+You can check out our Umbraco section of the [Knowledge base for more information](https://kb.sitehost.nz/cloud-containers/containers/ssl#how-can-i-enforce-https-o).
