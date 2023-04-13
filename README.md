@@ -8,6 +8,7 @@ First you'll need to install the .NET SDK onto your local system.
 For Ubuntu linux you can install it via snap using `snap install --classic dotnet-sdk` Depending on your version, distro and OS you will need to run your own commands.
 After that, you will need to install Umbraco `dotnet new -i Umbraco.Templates`.
 You can choose which version you wish to use like so. `dotnet new -i Umbraco.Templates:10.3.2`
+Keep in mind that our containers can only support versions from 10 onward due to us only supporting .NET versions 6 and 7.
 
 For our Cloud Container, we will want to create a SSH user that GitHub will use to connect to our container. We recommend creating a new user specifically for GitHub in the event of a compromise.
 
@@ -15,7 +16,7 @@ For our Cloud Container, we will want to create a SSH user that GitHub will use 
 To create the project you will want to run the following command: `dotnet new umbraco --name <Project Name/Directory>`
 Once that is done you will now have a new Umbraco project under the same name as the project name.
 There's a couple of changes we need to make in the file `Properties/launchSettings.json`.
-Under `issSetings`, you will need to change `applicationUrl` to `http://localhost:80`. After that you will need to change `sslPort` to `80`.
+Under `issSetings`, you will need to change `applicationUrl` to `http://localhost`. After that you will need to change `sslPort` to `80`.
 Next under `Umbraco.Web.UI` you will need to remove all of the URLs in `applicaationUrl` and leave the list empty.
 
 After all of that, your `launchSettings.json` should look like this.
@@ -26,8 +27,7 @@ After all of that, your `launchSettings.json` should look like this.
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:80",
-      "sslPort": 80
+      "applicationUrl": "http://localhost"
     }
   },
   "profiles": {
@@ -123,7 +123,7 @@ The only line you need to edit is to change `command=/usr/bin/dotnet Example.dll
 
 ## Configuring up GitHub Actions
 After creating a GitHub repo, what you can do now is create your workflow file. We recommend adjusting your workflow to your project's requirements.
-For the sake of this example, we will provide a workflow file that you can find under `.github/workflows/umbraco.yml-example`. Ensure to rename ty file by removing the `-example` once you have made your changes.
+For the sake of this example, we will provide a workflow file that you can find under `.github/workflows/umbraco.yml-example`. Ensure to rename to file by removing the `-example` once you have made your changes.
 The workflow file here has a couple of environment variables we will need to add into our GitHub repository.
 
 Go into your repository's `Settings` tab then go into `Secrets and variables` then into the subcategory `Actions`.
@@ -141,4 +141,4 @@ After this, any push or pull request that is done to the repository the Action w
 To add new packages, you can simply add them like other .NET packages. If you go to the Packages tab underneath your Umbraco control panel, you can click on whichever package you want and it will give you the command to run. Do this in your repository, commit and push the changes then GitHub actions will push the Package to your server.
 
 ## Enforcing HTTPS
-You can check out our Umbraco section of the [Knowledge base for more information](https://kb.sitehost.nz/cloud-containers/containers/ssl#how-can-i-enforce-https-o).
+You can check out our Umbraco section of the [Knowledge base for more information](https://kb.sitehost.nz/cloud-containers/containers/ssl#net-asp-net).
