@@ -8,7 +8,7 @@ First you'll need to install the .NET SDK onto your local system.
 For Ubuntu linux you can install it via snap using `snap install --classic dotnet-sdk` Depending on your version, distro and OS you will need to run your own commands.
 After that, you will need to install Umbraco `dotnet new -i Umbraco.Templates`.
 You can choose which version you wish to use like so. `dotnet new -i Umbraco.Templates:10.3.2`
-Keep in mind that our containers can only support versions from 10 onward due to us only supporting .NET versions 6 and 7.
+> Note we are currently only able to support Umbraco version 10 and up. Umbraco version below 10 requires .NET versions lower than 6 which is not available as a standard Cloud Container service image.
 
 For our Cloud Container, we will want to create a SSH user that GitHub will use to connect to our container. We recommend creating a new user specifically for GitHub in the event of a compromise.
 
